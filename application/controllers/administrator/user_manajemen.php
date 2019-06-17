@@ -11,6 +11,6 @@
  *
  * @author ZAYEED AN NAHYAN
  */
-class user_manajemen {
-    //put your code here
+class user_manajemen extends CI_Controller {
+    
 }
