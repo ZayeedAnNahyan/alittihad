@@ -1,0 +1,10 @@
+SISWA
+1. sertifikat (input data + foto) = 5
+2. prestasi non akademik (input data + foto)= 30
+3. ranking (input data + foto) = 25
+    Jika ranking 1 maka = 25, jika rangking 2 maka = 20, jika rangking 3 maka = 10
+4. Jumlah tanggungan ortu (input data + foto) = 10
+    Jika jumlah tanggungan > 3 maka = 10, jika jumlah tanggungan > 2 maka = 5, jika jumlah tanggungan 1 maka = 0
+5. Penghasilan kedua orang tua (input data + foto) = 30
+    Jika jumlah penghasilan < 2,0 maka = 30, jika jumlah penghasilan < 3,0 maka = 10, jika jumlah penghasilan < 3,5 maka = 5, > 3,5 maka =0
+

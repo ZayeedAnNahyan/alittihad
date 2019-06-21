@@ -15,7 +15,7 @@ class dasboard extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model(['ppdb/M_dasboard' => 'administrator/M_dasboard', 'M_User' => 'M_User']);
+        $this->load->model(['ppdb/M_dasboard' => 'ppdb/M_dasboard', 'M_User' => 'M_User']);
         $this->result = $this->M_User->ppdb();
     }
 

@@ -1,230 +1,151 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
     <head>
-        <meta charset="utf-8" />
-        <link rel="apple-touch-icon" sizes="76x76" href="<?= base_url() ?>asset/img/apple-icon.png">
-        <link rel="icon" type="image/png" href="<?= base_url() ?>asset/img/favicon.png">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <title>
-            <?= $title; ?>
-        </title>
-        <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-        <!--     Fonts and icons     -->
-        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-        <!-- CSS Files -->
-        <link href="<?= base_url() ?>asset/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" rel="stylesheet" />
-        <!-- CSS Just for demo purpose, don't include it in your project -->
-        <link href="<?= base_url() ?>asset/demo/demo.css" rel="stylesheet" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <link rel="icon" href="<?= base_url('assets/images/Logo/PT.Marsit.jpg'); ?>" type="image/ico" />
+        <title class="text-uppercase"><?= $title ?></title>
+        <link href="<?= base_url('assets/css/bootstrap.min.css'); ?>" rel="stylesheet">
+        <link href="<?= base_url('assets/css/font-awesome.min.css'); ?>" rel="stylesheet">
+        <link href="<?= base_url('node_modules/nprogress/nprogress.css'); ?>" rel="stylesheet">
+        <link href="<?= base_url('assets/css/datatables.min.css'); ?>" rel="stylesheet" type="text/css"/>
+        <link href="<?= base_url('assets/css/bootstrap-datepicker.min.css'); ?>" rel="stylesheet" />
+        <link href="<?= base_url('assets/css/animate.css'); ?>" type="text/css" rel="stylesheet"/>
+        <link href="<?= base_url('assets/css/custom.min.css'); ?>" rel="stylesheet">
+        <link href="<?= base_url('assets/css/dropzone.min.css'); ?>" rel=stylesheet type="text/css" />
+        <link href="<?= base_url('node_modules/chart.js/dist/Chart.min.css'); ?>" rel=stylesheet type="text/css" />
     </head>
+    <body class="nav nav-md">
+        <div class="container body">
+            <div class="main_container">
+                <div class="col-md-2 center_col">
+                    <div class="left_col scroll-view">
+                        <div class="clearfix"></div>
+                        <div class="profile clearfix">
+                            <div style="background-color: #0091ea; font-weight: bold" class="logo text-center">
+                                <a href="#" class="simple-text logo-normal font-weight-bold" style="color: #ffffff">
+                                    <h4>SELAMAT DATANG</h4> 
+                                </a>
+                            </div>
+                        </div>
+                        <br/>
+                        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                            <?php
+                            if ($this->session->userdata('lvl') == 1) {//Administrator
+                                echo '<div class="menu_section">'
+                                . '<ul class="nav side-menu">'
+                                . '<li><a class="text-uppercase" href=' . base_url('administrator/dasboard/index') . '><i class="fa fa-dashboard"></i> Dashboard</a></li>'
+                                . '<li><a class="text-uppercase" href=' . base_url('administrator/user_manajemen/index') . '><i class="glyphicon glyphicon-user"></i> &nbsp &nbsp User Manajemen</a></li>'
+                                . '<li><a class="text-uppercase" href=' . base_url('administrator/data_pengajuan_beasiswa/index') . '><i class="glyphicon glyphicon-list-alt"></i> &nbsp &nbsp Data Pengajuan</a></li>'
+                                . '<li><a class="text-uppercase"> <i class="glyphicon glyphicon-list-alt"></i> &nbsp &nbsp Arsip Beasiswa <span class="fa fa-chevron-down"></span></a>'
+                                . '<ul class="nav child_menu">'
+                                . '<li><a href=' . base_url('administrator/penerima_beasiswa/index') . ' class="text-uppercase">Beasiswa Diterima</a></li>'
+                                . '<li><a href=' . base_url('administrator/beasiswa_ditolak/index') . ' class="text-uppercase">Beasiswa Ditolak</a></li>'
+                                . '</ul></li>'
+                                . '</ul></div>';
+                            } elseif ($hak_akses == 2) {//Siswa
+                                echo '<div class="menu_section">'
+                                . '<ul class="nav side-menu">'
+                                . '<li><a class="text-uppercase" href=' . base_url('administrator/dasboard/index') . '><i class="fa fa-dashboard"></i> Dashboard </a></li>'
+                                . '<li><a class="text-uppercase" href=' . base_url('administrator/user_manajemen/index') . '><i class="glyphicon glyphicon-user"></i> &nbsp &nbsp Pengajuan Beasiswa </a></li>'
+                                . '<li><a class="text-uppercase" href=' . base_url('administrator/data_pengajuan_beasiswa/index') . '><i class="glyphicon glyphicon-list-alt"></i> &nbsp &nbsp Hasil Pengajuan</a></li>'
+                                . '</ul></li>'
+                                . '</ul></div>';
+                            } elseif ($hak_akses == 3) {//ADMINISTRATOR
+                                echo '';
+                            } elseif ($hak_akses == 10) {//SALES MARKETING OFFICER
+                                echo '<div class = "menu_section">'
+                                . '<h3>Sales Officer</h3>'
+                                . '<ul class = "nav side-menu">'
+                                . '<li><a class = "text-uppercase" href = ' . base_url('Sales/Dashboard/index') . '><i class = "fa fa-dashboard"></i> Dashboard</a></li>'
+                                . '<li><a class = "text-uppercase"><i class = "fa fa-home"></i> Home <span class = "fa fa-chevron-down"></span></a>'
+                                . '<ul class = "nav child_menu">'
+                                . '<li><a href = ' . base_url('Sales/Caridata/index') . ' class = "text-uppercase">Cari data</a></li>
+                                <li><a href = ' . base_url('Sales/Daftarkunjungan/index') . ' class = "text-uppercase">Daftar Kunjungan</a></li>
+                                <li><a href = ' . base_url('Sales/Onthespot/index') . ' class = "text-uppercase">Interaksi non database</a></li>'
+                                . '</ul></li>'
+                                . '<li><a class = "text-uppercase"><i class = "fa fa-shopping-cart"></i> Penjualan <span class = "fa fa-chevron-down"></span></a>'
+                                . '<ul class = "nav child_menu">'
+                                . '<li><a href = ' . base_url('Sales/Pencairan/index') . ' class = "text-uppercase">Pencairan</a></li>
+                                <li><a href = ' . base_url('Sales/Simulasi/Simulasi2') . ' class = "text-uppercase"> simulasi </a></li>'
+                                . '</ul></li>'
+                                . '<li><a class = "text-uppercase"><i class = "fa fa-briefcase text-uppercase"></i> laporan <span class = "fa fa-chevron-down"></span></a>'
+                                . '<ul class = "nav child_menu">'
+                                . '<li><a href = ' . base_url('Sales/Hotprospek') . ' class = "text-uppercase">HOT prospek</a></li>'
+                                . '<li><a href = ' . base_url('Sales/Pencairan/Hasil') . ' class = "text-uppercase">hasil Pencairan</a></li>'
+                                . '<li><a href = ' . base_url('Sales/Interaksi/Hasil') . ' class = "text-uppercase">Hasil Interaksi</a></li>'
+                                . '<li><a href = ' . base_url('Sales/Simulasi/Hasil') . ' class = "text-uppercase">Hasil Simulasi</a></li>'
+                                . '</ul></li>'
+                                . '</ul></div>';
+                            }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="top_nav">
+                    <div class="nav_menu">
+                        <nav>
+                            <div class="nav toggle"> </div>
+                            <div class="container">
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li class="active"><a href="#">Home</a></li>
+                                    <li><a href="#">About</a></li>
 
-    <body class="">
-        <div class="wrapper ">
-            <div class="sidebar" data-color="purple" data-background-color="white" data-image="<?= base_url() ?>asset/img/sidebar-1.jpg">
-                <!--
-                  Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
-          
-                  Tip 2: you can also add an image using data-image tag
-                -->
-                <div class="logo">
-                    <a href="" class="simple-text logo-normal font-weight-bold">
-                        SELAMAT DATANG
-                    </a>
-                </div>
-                <div class="sidebar-wrapper">
-                    <ul class="nav">
-                        <?php
-                        $admin = '';
-                        $siswa = '';
-                        $ppdb = '';
-                        if ($this->session->userdata('lvl') == 1) {
-                            $admin = 'block;';
-                            $siswa = 'none;';
-                            $ppdb = 'none;';
-                        } elseif ($this->session->userdata('lvl') == 2) {
-                            $admin = 'none;';
-                            $siswa = 'block;';
-                            $ppdb = 'none;';
-                        } elseif ($this->session->userdata('lvl') == 3) {
-                            $admin = 'none;';
-                            $siswa = 'none;';
-                            $ppdb = 'block;';
-                        }
-                        ?>
-                        <!--=======================================================================================-->
-                        <div style="display:<?= $admin; ?>"><!--admin-->
-                            <li class="nav-item active  ">
-                                <a class="nav-link" href="">
-                                    <i class="material-icons">dashboard</i>
-                                    <p>Dashboard</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="">
-                                    <i class="material-icons">assignment_ind</i>
-                                    <p>User Management</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="">
-                                    <i class="material-icons">assignment</i>
-                                    <p>data pengajuan beasiswa</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="">
-                                    <i class="material-icons">assignment</i>
-                                    <p>beasiswa ditolak</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="">
-                                    <i class="material-icons">assignment</i>
-                                    <p>penerima beasiswa</p>
-                                </a>
-                            </li>
-                        </div>
-                        <!--=======================================================================================-->
-                        <div style="display:<?= $siswa; ?>"><!--siswa-->
-                            <li class="nav-item active  ">
-                                <a class="nav-link" href="">
-                                    <i class="material-icons">dashboard</i>
-                                    <p>Dashboard</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="">
-                                    <i class="material-icons">description</i>
-                                    <p>Pengajuan Beasiswa</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="">
-                                    <i class="material-icons">assignment_turned_in</i>
-                                    <p>Hasil Pengajuan Beasiswa</p>
-                                </a>
-                            </li>
-                        </div>
-                        <!--=======================================================================================-->
-                        <div style="display:<?= $ppdb; ?>"><!--ppdb-->
-                            <li class="nav-item active">
-                                <a class="nav-link" href="">
-                                    <i class="material-icons">dashboard</i>
-                                    <p>Dashboard</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="">
-                                    <i class="material-icons">description</i>
-                                    <p>pengajuan beasiswa</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="">
-                                    <i class="material-icons">assignment_turned_in</i>
-                                    <p>hasil pengajuan</p>
-                                </a>
-                            </li>
-                        </div>
-                    </ul>
-                </div>
-            </div>
-            <div class="main-panel">
-                <!-- Navbar -->
-                <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
-                    <div class="container-fluid">
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="navbar-toggler-icon icon-bar"></span>
-                            <span class="navbar-toggler-icon icon-bar"></span>
-                            <span class="navbar-toggler-icon icon-bar"></span>
-                        </button>
-                        <div class="collapse navbar-collapse justify-content-end">
-                            <ul class="navbar-nav">
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">notifications</i>
-                                        <span class="notification">1</span>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item" href="#">pengajuan beasiswa baru</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link" href="#pablo" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">person</i>
-                                        <p class="d-lg-none d-md-block">
-                                            Account
-                                        </p>
-                                    </a>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
                                         <a class="dropdown-item" href="#">Profile</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="<?= base_url('Auth/Logout') ?>">Log out</a>
                                     </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-                <!-- End Navbar -->
-                <div class="content"style="margin-top:0px ! IMPORTANT;">
-                    <div class="container-fluid">
-                        <?= $content ?>
+                                    
+                                    <li class="dropdown">
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" <i class="glyphicon glyphicon-user"></i>>
+                                             <span class="caret"></span></a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="#">HTML</a></li>
+                                            <li><a href="#">CSS</a></li>
+                                            <li><a href="#">JavaScript</a></li>                        
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
                     </div>
                 </div>
-                <footer class="footer">
-                    <div class="container-fluid">
-                        <div class="copyright float-right">
-                            &copy;
-                            <?= date("Y") ?>, made with <i class="material-icons">favorite</i> by
-                            <a href="#" target="_blank"> SMP AL-ITTIHAD</a>
+                <div class="right_col" role="main" style="min-height:0px ! important;">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2 class="text-uppercase"></h2>
+                            <div class="clearfix" style="clear:both;margin:0px;"></div>
+                        </div>
+                        <div class="x_content clearfix" style="clear:both;margin:0px;display:block;">
+                            <?= $content ?>
                         </div>
                     </div>
-                </footer>
+                </div>
             </div>
         </div>
-        <script src="<?= base_url() ?>asset/js/core/jquery.min.js"></script>
-        <script src="<?= base_url() ?>asset/js/core/popper.min.js"></script>
-        <script src="<?= base_url() ?>asset/js/core/bootstrap-material-design.min.js"></script>
-        <script src="<?= base_url() ?>asset/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-        <!-- Plugin for the momentJs  -->
-        <script src="<?= base_url() ?>asset/js/plugins/moment.min.js"></script>
-        <!--  Plugin for Sweet Alert -->
-        <script src="<?= base_url() ?>asset/js/plugins/sweetalert2.js"></script>
-        <!-- Forms Validations Plugin -->
-        <script src="<?= base_url() ?>asset/js/plugins/jquery.validate.min.js"></script>
-        <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
-        <script src="<?= base_url() ?>asset/js/plugins/jquery.bootstrap-wizard.js"></script>
-        <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
-        <script src="<?= base_url() ?>asset/js/plugins/bootstrap-selectpicker.js"></script>
-        <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
-        <script src="<?= base_url() ?>asset/js/plugins/bootstrap-datetimepicker.min.js"></script>
-        <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
-        <script src="<?= base_url() ?>asset/js/plugins/jquery.dataTables.min.js"></script>
-        <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
-        <script src="<?= base_url() ?>asset/js/plugins/bootstrap-tagsinput.js"></script>
-        <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
-        <script src="<?= base_url() ?>asset/js/plugins/jasny-bootstrap.min.js"></script>
-        <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
-        <script src="<?= base_url() ?>asset/js/plugins/fullcalendar.min.js"></script>
-        <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
-        <script src="<?= base_url() ?>asset/js/plugins/jquery-jvectormap.js"></script>
-        <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-        <script src="<?= base_url() ?>asset/js/plugins/nouislider.min.js"></script>
-        <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
-        <!-- Library for adding dinamically elements -->
-        <script src="<?= base_url() ?>asset/js/plugins/arrive.min.js"></script>
-        <!--  Google Maps Plugin    -->
-        <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-        <!-- Chartist JS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
-        <!--  Notifications Plugin    -->
-        <script src="<?= base_url() ?>asset/js/plugins/bootstrap-notify.js"></script>
-        <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-        <script src="<?= base_url() ?>asset/js/material-dashboard.js?v=2.1.1" type="text/javascript"></script>
-    </body>
+    <footer>
+        <div class="pull-right"> Copyrights ©<?= date("Y") ?> SMP IT Al-Ittihad Kota Bekasi</a> </div>
+        <div class="clearfix"></div>
+    </footer>
+    <script src="<?= base_url('assets/js/jquery.min.js'); ?>" type="text/javascript"></script>
+    <script src="<?= base_url('assets/js/bootstrap.min.js'); ?>" type="text/javascript"></script>
+    <script src="<?= base_url('assets/js/fastclick.min.js'); ?>" type="text/javascript"></script>
+    <script src="<?= base_url('node_modules/nprogress/nprogress.js'); ?>" type="text/javascript"></script>
+    <script src="<?= base_url('node_modules/chart.js/dist/Chart.min.js'); ?>" type="text/javascript"></script>
+    <script src="<?= base_url('assets/js/date.js'); ?>" type="text/javascript"></script>
+    <script src="<?= base_url('assets/js/moment.min.js'); ?>" type="text/javascript"></script>
+    <script src="<?= base_url('assets/js/custom.min.js'); ?>" type="text/javascript"></script>
+    <script src="<?= base_url('assets/js/dropzone.min.js'); ?>" type="text/javascript"></script>
+    <script src="<?= base_url('assets/js/jquery.inputmask.bundle.min.js'); ?>" type="text/javascript"></script>
+    <script src="<?= base_url('assets/js/bootstrap-datepicker.min.js'); ?>" type="text/javascript"></script>
+    <script src="<?= base_url('assets/js/signature_pad.min.js'); ?>" type="text/javascript"></script>
+    <script src="<?= base_url('assets/js/jquery.number.min.js'); ?>" type="text/javascript"></script>
+    <script src="<?= base_url('assets/js/html2canvas.min.js'); ?>" type="text/javascript"></script>
+    <script src="<?= base_url('assets/js/datatables.min.js'); ?>" type="text/javascript"></script>
+    <script src="<?= base_url('assets/js/pdfmake.min.js'); ?>" type="text/javascript"></script>
+    <script src="<?= base_url('assets/js/vfs_fonts.js'); ?>" type="text/javascript"></script>
+</body>
 </html>

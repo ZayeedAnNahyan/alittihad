@@ -17,12 +17,12 @@ and open the template in the editor.
             <form method="post" action="<?= base_url('Auth/proses/') ?>">
                 <div class="row">
                     <div class="col-xl-4">
-                        One of three columns
+                        
                     </div>
                     <div class="col-xl-4">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="text-center"> SELAMAT DATANG BITTIHAD </h3>
+                                <h3 class="text-center font-weight-bold" style="color: #0091ea"> Sign In </h3>
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
@@ -40,16 +40,16 @@ and open the template in the editor.
                                 </div>
                                 <p id="errmsg"></p>
                                 <div class="form-group text-right">
-                                    <input type="submit" class="btn btn-warning">
+                                    <input style="background-color: #0091ea; font-weight: bold; color: #ffffff" type="submit" class="btn btn-warning">
                                 </div>
                             </div>
-                            <div class="card-footer">
+                            <div class="card-footer text-center font-weight-bold">
                                 <p> &copy; <?= date('Y') ?> SMP IT Al-Ittihad Kota Bekasi </p>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-4">
-                        One of three columns
+                        
                     </div>
                 </div>
             </form>
